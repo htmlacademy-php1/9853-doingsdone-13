@@ -2,8 +2,8 @@
 
 require_once 'helpers.php';
 
-$show_complete_tasks = rand(0, 1);
-$checkCompletedAttribute = $show_complete_tasks ? "checked" : "";
+$showCompleteTasks = rand(0, 1);
+$checkCompletedAttribute = $showCompleteTasks ? "checked" : "";
 $categories = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];
 $pageTitle = "Дела в порядке";
 
@@ -57,11 +57,19 @@ function countTasks($tasks, $category)
     return $count;
 }
 
+function countHours($date)
+{
+    $diffTime = strtotime($date) - time();
+    $hours = floor($diffTime / 3600);
+    return $hours;
+}
+
+
 $pageContent = include_template('main.php', [
     'categories' => $categories,
     'tasks' => $tasks,
     'checkCompletedAttribute' => $checkCompletedAttribute,
-    'show_complete_tasks' => $show_complete_tasks
+    'showCompleteTasks' => $showCompleteTasks
 ]);
 
 $pageLayout = include_template('layout.php', [
