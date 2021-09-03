@@ -4,17 +4,17 @@
     <nav class="main-navigation">
         <ul class="main-navigation__list">
             <?php foreach ($categories as $category) : ?>
-                <li class="main-navigation__list-item">
-                    <a class="main-navigation__list-item-link" href="#"><?= htmlspecialchars($category); ?></a>
-                    <span class="main-navigation__list-item-count"> <?= countTasks($tasks, $category) ?>
+            <li class="main-navigation__list-item">
+                <a class="main-navigation__list-item-link" href="#"><?= htmlspecialchars($category); ?></a>
+                <span class="main-navigation__list-item-count"> <?= countTasks($tasks, $category) ?>
                 </span>
-                </li>
+            </li>
             <?php endforeach; ?>
         </ul>
     </nav>
 
     <a class="button button--transparent button--plus content__side-button" href="pages/form-project.html"
-       target="project_add">Добавить проект</a>
+        target="project_add">Добавить проект</a>
 </section>
 
 <main class="content__main">
@@ -37,35 +37,35 @@
         <label class="checkbox">
             <!--добавить сюда атрибут "checked", если переменная $show_complete_tasks равна единице-->
             <input class="checkbox__input visually-hidden show_completed" <?= $checkCompletedAttribute ?>
-                   type="checkbox">
+            type="checkbox">
             <span class="checkbox__text">Показывать выполненные</span>
         </label>
     </div>
 
     <table class="tasks">
         <?php foreach ($tasks as $task) : ?>
-            <?php if (!$show_complete_tasks && $task['status']) {
-                continue;
-            }
-            ?>
-            <tr class="tasks__item task <?php if ($task['status']): ?>
-                             task--completed <?php endif; ?>">
-                <td class=" task__select">
-                    <label class="checkbox task__checkbox">
-                        <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                        <span class="checkbox__text"><?= htmlspecialchars($task['title']); ?></span>
-                    </label>
-                </td>
+        <?php if (!$showCompletedTasks && $task['status']) {
+            continue;
+        }
+        ?>
+        <tr class="tasks__item task <?php if ($task['status']): ?> task--completed <?php endif; ?>
+            <?php if (isTaskImportant($task['date'])): ?> task--important<?php endif; ?> ">
+            <td class=" task__select">
+                <label class="checkbox task__checkbox">
+                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
+                    <span class="checkbox__text"><?= htmlspecialchars($task['title']); ?></span>
+                </label>
+            </td>
 
-                <td class="task__file">
-                    <a class="download-link" href="#">Home.psd</a>
-                </td>
+            <td class="task__file">
+                <a class="download-link" href="#">Home.psd</a>
+            </td>
 
-                <td class="task__date"><?php if ($task['date']): ?>
-                        <?= htmlspecialchars($task['date']); ?>
-                    <?php endif; ?>
-                </td>
-            </tr>
+            <td class="task__date"><?php if ($task['date']): ?>
+                <?= htmlspecialchars($task['date']); ?>
+                <?php endif; ?>
+            </td>
+        </tr>
         <?php endforeach; ?>
     </table>
 </main>
