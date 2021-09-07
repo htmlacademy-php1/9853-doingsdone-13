@@ -29,10 +29,10 @@ CREATE TABLE tasks (
   file_path VARCHAR(255) NULL,
   deadline_date TIMESTAMP NULL,
   user_id INT unsigned NOT NULL,
+  project_id INT unsigned NOT NULL,
   created_at  TIMESTAMP DEFAULT NOW()  NOT NULL,
   updated_at TIMESTAMP DEFAULT NOW()  ON UPDATE NOW() NOT NULL,
   CONSTRAINT fk_task_user FOREIGN KEY (user_id) REFERENCES users(id),
-  project_id INT unsigned NOT NULL,
   CONSTRAINT fk_task_project FOREIGN KEY (project_id) REFERENCES projects(id)
 );
 
